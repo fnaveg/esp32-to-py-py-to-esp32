@@ -1,0 +1,19 @@
+import socket
+
+HOST = '192.168.0.15' # ESP32의 IP 주소
+PORT = 80 # TCP 서버 포트 번호
+
+# 서버에 접속
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect((HOST, PORT))
+
+# 데이터 수신
+while True:
+    data = client.recv(1024)
+    if not data:
+        break
+    data = data.decode().strip()
+    print(data)
+
+# 소켓 종료
+client.close()
